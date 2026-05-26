@@ -12,15 +12,11 @@
 
 ## 界面预览
 
-将截图放到 [`docs/images/`](docs/images/)，保存后取消下面注释或改成你的文件名即可在 GitHub 上显示。
-
 <!--
 ![登录页](docs/images/login.png)
 ![工作台](docs/images/workbench.png)
 ![项目详情](docs/images/project-detail.png)
 -->
-
-> 单张图居中并限制宽度可用 HTML：  
 > <p align="center"><img src="docs/images/project.png" alt="" width="720" /><p>
 > <p align="center"><img src="docs/images/task.png" alt="" width="720" /></p>
 > <p align="center"><img src="docs/images/report.png" alt="" width="720" /></p>
