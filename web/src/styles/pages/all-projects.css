@@ -1,0 +1,293 @@
+.wt-project-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.wt-project-header-nav__crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.wt-project-header-nav__crumb .anticon {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+}
+
+.wt-project-header-nav__crumb-sep {
+  font-size: 11px !important;
+}
+
+.wt-project-header-nav__title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.wt-project-header-nav__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.wt-project-header-nav__divider {
+  width: 1px;
+  height: 18px;
+  background: #e8e8e8;
+  margin-inline: 4px;
+}
+
+.wt-project-header-nav__tab {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  height: 56px;
+  padding: 0 2px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.wt-project-header-nav__tab--active {
+  color: #1677ff;
+  border-bottom-color: #1677ff;
+}
+
+.wt-content-inner {
+  padding: 20px 24px 24px;
+  min-height: calc(100vh - 56px);
+  background: #fafafa;
+}
+
+.wt-project-card .ant-card-body {
+  padding: 0;
+}
+
+.wt-project-card__cover {
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.wt-project-card__cover--gradient {
+  background: linear-gradient(145deg, #5aa7f0 0%, #3b82c4 55%, #2f6fb0 100%);
+}
+
+.wt-project-card__title {
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.wt-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/** 全部项目：与「我的任务」工具栏风格对齐（独立容器，不占满视口高度） */
+.wt-all-projects-toolbar.wt-my-tasks__toolbar {
+  height: auto;
+  max-height: none;
+  border-radius: 8px;
+  border: 1px solid #ececec;
+  margin-bottom: 16px;
+}
+
+.wt-all-projects-toolbar .wt-all-projects__search.wt-target-page__search.ant-input-affix-wrapper {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.wt-all-projects-toolbar .wt-all-projects__search.wt-target-page__search.ant-input-affix-wrapper:hover,
+.wt-all-projects-toolbar .wt-all-projects__search.wt-target-page__search.ant-input-affix-wrapper-focused {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.wt-all-projects__table-wrap {
+  border-radius: 8px;
+  border: 1px solid #ececec;
+}
+
+/** 全部项目 · 表格视图 */
+.wt-all-projects-table.wt-my-tasks__table-wrap {
+  border-radius: 10px;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: min(68vh, calc(100vh - 220px));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  scrollbar-color: rgba(0, 0, 0, 0.35) #ebebeb;
+  scrollbar-width: thin;
+}
+
+.wt-all-projects-table.wt-my-tasks__table-wrap::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.wt-all-projects-table.wt-my-tasks__table-wrap::-webkit-scrollbar-track {
+  background: #ebebeb;
+  border-radius: 8px;
+}
+
+.wt-all-projects-table.wt-my-tasks__table-wrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.32);
+  border-radius: 8px;
+  border: 2px solid #ebebeb;
+}
+
+.wt-all-projects-table.wt-my-tasks__table-wrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.wt-all-projects-table .wt-all-projects__table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.wt-all-projects-table .wt-all-projects__table thead th {
+  background: #fafafa;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.wt-all-projects-table .wt-all-projects__th--index {
+  background: #fafafa;
+}
+
+.wt-all-projects-table .wt-my-tasks__table thead th.wt-my-tasks__table-index {
+  background: #fafafa;
+}
+
+.wt-all-projects-table .wt-my-tasks__table tbody td.wt-my-tasks__table-index {
+  background: #fff;
+}
+
+.wt-all-projects-table .wt-all-projects__row:hover .wt-my-tasks__table-index {
+  background: #f8fbff;
+}
+
+.wt-all-projects-table .wt-all-projects__row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.wt-all-projects-table .wt-all-projects__row:hover {
+  background: #f8fbff;
+}
+
+.wt-all-projects-table .wt-all-projects__row:active {
+  background: #f0f5ff;
+}
+
+.wt-all-projects-table .wt-all-projects__td-muted {
+  color: rgba(0, 0, 0, 0.55);
+  font-size: 13px;
+}
+
+.wt-all-projects-table .wt-all-projects__td-date {
+  font-variant-numeric: tabular-nums;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 13px;
+}
+
+.wt-all-projects-table .wt-all-projects__visibility {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.wt-all-projects-table .wt-all-projects__cell-title {
+  font-weight: 500;
+}
+
+.wt-all-projects-table .wt-all-projects__th--actions,
+.wt-all-projects-table .wt-all-projects__td-actions {
+  text-align: center;
+  padding-inline: 4px !important;
+}
+
+.wt-all-projects-table .wt-all-projects__row-more {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.wt-all-projects-table .wt-all-projects__row-more:hover {
+  color: #1677ff;
+  background: rgba(22, 119, 255, 0.06);
+}
+
+.wt-all-projects-table .wt-all-projects__td-datetime {
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+/** 状态图标在标签（pill）内部，与文案同一圆角容器 */
+.wt-all-projects__status-pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.wt-my-tasks__status-pill--pink .wt-all-projects__status-pill-icon--notstarted {
+  color: #fff;
+}
+
+.wt-my-tasks__status-pill--green .wt-all-projects__status-pill-icon--doing,
+.wt-my-tasks__status-pill--green .wt-all-projects__status-pill-icon--accept {
+  color: #389e0d;
+}
+
+.wt-my-tasks__status-pill:not(.wt-my-tasks__status-pill--pink):not(.wt-my-tasks__status-pill--green) .wt-all-projects__status-pill-icon--done {
+  color: #1677ff;
+}
+
+.wt-my-tasks__status-pill:not(.wt-my-tasks__status-pill--pink):not(.wt-my-tasks__status-pill--green) .wt-all-projects__status-pill-icon--closed {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.wt-my-tasks__status-pill:not(.wt-my-tasks__status-pill--pink):not(.wt-my-tasks__status-pill--green) .wt-all-projects__status-pill-icon--other {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.wt-all-projects__owner-cell {
+  display: inline-flex !important;
+  align-items: center;
+  min-width: 0;
+}
+
+.wt-all-projects__owner-avatar {
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+.wt-all-projects__owner-avatar--empty {
+  background: #f0f0f0 !important;
+  color: rgba(0, 0, 0, 0.35) !important;
+}
+
+.wt-all-projects__owner-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

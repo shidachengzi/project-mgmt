@@ -1,0 +1,365 @@
+.wt-reports-page {
+  min-height: calc(100vh - 56px);
+  background: #fff;
+  padding: 0px 12px;
+}
+
+.wt-reports-page__head {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.wt-reports-page__tabs .ant-tabs-nav {
+  margin-bottom: 6px;
+}
+
+.wt-reports-page__summary {
+  min-height: 92px;
+  border: 1px solid #f0f0f0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) 140px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.wt-reports-page__summary-item {
+  padding: 0 24px;
+  border-right: 1px solid #f5f5f5;
+}
+
+.wt-reports-page__summary-item:last-of-type {
+  border-right: none;
+}
+
+.wt-reports-page__summary-label {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+}
+
+.wt-reports-page__summary-value {
+  margin-top: 8px;
+  font-size: 34px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.78);
+  font-weight: 300;
+}
+
+.wt-reports-page__summary-value--gold {
+  color: #d4b106;
+}
+
+.wt-reports-page__summary-value--green {
+  color: #52c41a;
+}
+
+.wt-reports-page__summary-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-reports-page__table .ant-table {
+  border: 1px solid #f0f0f0;
+  font-size: 12px;
+}
+
+.wt-reports-page__table .ant-table-thead > tr > th {
+  font-size: 12px !important;
+  padding: 8px 10px !important;
+}
+
+.wt-reports-page__table .ant-table-tbody > tr > td {
+  font-size: 12px !important;
+  padding: 8px 10px !important;
+}
+
+.wt-reports-page__table .ant-table-thead > tr > th,
+.wt-reports-page__table .ant-table-tbody > tr > td {
+  border-right: 1px solid #f0f0f0 !important;
+}
+
+.wt-reports-page__table .wt-reports__progress-cell,
+.wt-reports-page__table .wt-reports__progress-cell > span {
+  font-size: 12px;
+}
+
+.wt-reports-page__table .wt-reports-detail__status {
+  font-size: 11px;
+  height: 20px;
+  padding: 0 8px;
+}
+
+.wt-reports-page__table .ant-pagination {
+  font-size: 12px;
+}
+
+.wt-reports-page__table .ant-table-thead > tr > th:last-child,
+.wt-reports-page__table .ant-table-tbody > tr > td:last-child {
+  border-right: none !important;
+}
+
+.wt-reports__progress-cell {
+  display: inline-grid;
+  grid-template-columns: 72px auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.wt-reports__status {
+  display: inline-block;
+  min-width: 40px;
+  text-align: center;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 11px;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #13c2c2;
+  background: #e6fffb;
+}
+
+.wt-reports__status--danger {
+  color: #ff4d4f;
+  background: #fff1f0;
+}
+
+.wt-reports-header-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  height: 56px;
+}
+
+.wt-reports-header-nav__crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.wt-reports-header-nav__crumb-sep.anticon {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+}
+
+.wt-reports-header-nav__title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  font-weight: 600;
+}
+
+.wt-reports-header-nav__divider {
+  width: 1px;
+  height: 18px;
+  background: #e8e8e8;
+}
+
+.wt-reports-header-nav__tab {
+  border: none;
+  background: transparent;
+  height: 56px;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.wt-reports-header-nav__tab--active {
+  color: #1677ff;
+  border-bottom-color: #1677ff;
+}
+
+.wt-reports-detail-modal .ant-modal-content {
+  padding: 0;
+}
+
+.wt-reports-detail-modal .ant-modal-header {
+  padding: 12px 16px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.wt-reports-detail-modal .ant-modal-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.wt-reports-detail-modal .ant-modal-body {
+  padding: 0;
+}
+
+.wt-reports-detail-modal .ant-table {
+  font-size: 12px;
+}
+
+.wt-reports-detail-modal .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 8px 10px !important;
+}
+
+.wt-reports-detail-modal .ant-table-tbody > tr > td {
+  height: 34px;
+  font-size: 12px;
+  padding: 6px 10px !important;
+}
+
+.wt-reports-detail-modal .wt-reports-detail__status {
+  font-size: 11px;
+  height: 20px;
+  padding: 0 8px;
+}
+
+.wt-reports-detail__seq {
+  display: inline-block;
+  min-width: 34px;
+  text-align: center;
+  border-radius: 4px;
+  background: #f5f7fa;
+  color: #91a0b6;
+  font-size: 11px;
+  line-height: 18px;
+  padding: 0 6px;
+}
+
+.wt-reports-detail__type {
+  color: rgba(0, 0, 0, 0.72);
+  font-size: 12px;
+}
+
+.wt-reports-detail-modal .wt-reports-detail__title {
+  font-size: 12px;
+}
+
+.wt-reports-detail-modal .wt-reports-detail__deadline {
+  font-size: 12px;
+}
+
+.wt-reports-detail__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  height: 22px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.wt-reports-detail__status--todo {
+  color: #ff4d4f;
+  background: #fff1f0;
+}
+
+.wt-reports-detail__status--doing {
+  color: #faad14;
+  background: #fffbe6;
+}
+
+.wt-reports-detail__status--done {
+  color: #36cfc9;
+  background: #e6fffb;
+}
+
+.wt-reports-detail__title {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.wt-reports-detail__owner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wt-reports-detail__owner-avatar {
+  background: #ffd6de;
+  color: #cf1322;
+  font-size: 10px;
+}
+
+.wt-reports-detail__owner-avatar--empty {
+  background: #f0f0f0 !important;
+  color: rgba(0, 0, 0, 0.35) !important;
+}
+
+.wt-reports-detail__deadline {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.wt-reports-detail__row--clickable {
+  cursor: pointer;
+}
+
+.wt-reports-detail__row--clickable:hover > td {
+  background: #f5faff !important;
+}
+
+.wt-reports-project-detail-modal .ant-modal {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  max-width: 100vw;
+}
+
+.wt-reports-project-detail-modal .ant-modal-content {
+  padding: 0;
+  border-radius: 0;
+}
+
+.wt-reports-project-detail-modal .ant-modal-close {
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+
+.wt-reports-project-detail-modal .ant-modal-body {
+  padding: 0;
+  max-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+}
+
+/* —— 报表：仅主表数据区骨架 —— */
+.wt-reports-table-skeleton {
+  border: 1px solid #f0f0f0;
+  background: #fff;
+  font-size: 12px;
+}
+
+.wt-reports-table-skeleton__table {
+  overflow: hidden;
+}
+
+.wt-reports-table-skeleton__thead,
+.wt-reports-table-skeleton__row {
+  display: grid;
+  grid-template-columns: var(--wt-reports-sk-grid);
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+}
+
+.wt-reports-table-skeleton__thead {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.wt-reports-table-skeleton__row {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.wt-reports-table-skeleton__row:last-child {
+  border-bottom: none;
+}
+
+.wt-reports-table-skeleton__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 10px 12px;
+  border-top: 1px solid #f0f0f0;
+}

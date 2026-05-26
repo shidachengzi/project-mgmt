@@ -1,0 +1,688 @@
+.wt-my-tasks {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 56px);
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
+  background: #f5f5f5;
+  padding: 10px 8px;
+}
+
+.wt-my-tasks__toolbar {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid #ebebeb;
+  background: #fff;
+}
+
+/** 搜索框与筛选、视图等控件同一行，靠左排列 */
+.wt-my-tasks__toolbar-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.wt-my-tasks__toolbar-right {
+  flex: 0 0 auto;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.wt-my-tasks__th--sortable {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.wt-my-tasks__th--sortable:hover {
+  background: #fafafa;
+}
+
+.wt-my-tasks__th__inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/** 表头排序：上下箭头叠放，与常见表格排序图标一致 */
+.wt-my-tasks__th__sort-stack {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.wt-my-tasks__th__caret {
+  font-size: 9px;
+  color: #bfbfbf;
+  line-height: 0.85;
+}
+
+.wt-my-tasks__th__caret--active {
+  color: #1677ff;
+}
+
+/** 覆盖 project-detail 中搜索框边框，我的任务页无边框 */
+.wt-my-tasks .wt-my-tasks__search.wt-target-page__search.ant-input-affix-wrapper {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.wt-my-tasks .wt-my-tasks__search.wt-target-page__search.ant-input-affix-wrapper:hover,
+.wt-my-tasks .wt-my-tasks__search.wt-target-page__search.ant-input-affix-wrapper-focused {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.wt-my-tasks__table-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-top: none;
+  overflow: auto;
+}
+
+.wt-my-tasks__table-pagination {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-top: none;
+  font-size: 12px;
+}
+
+.wt-my-tasks__table {
+  width: 100%;
+  min-width: 1460px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.wt-my-tasks__table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.72);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.wt-my-tasks__table tbody td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f5f5f5;
+  border-right: 1px solid #f0f0f0;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.wt-my-tasks__table tbody td .wt-reports-detail__status {
+  font-size: 11px;
+  height: 20px;
+  padding: 0 8px;
+}
+
+.wt-my-tasks__table-number {
+  font-size: 11px;
+  font-family: monospace;
+}
+
+.wt-my-tasks__table thead th:last-child,
+.wt-my-tasks__table tbody td:last-child {
+  border-right: none;
+}
+
+.wt-my-tasks__table tbody tr:hover {
+  background: #fafcff;
+}
+
+.wt-my-tasks__table tbody tr {
+  cursor: pointer;
+}
+
+.wt-my-tasks__table-index {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 11px;
+  background: #fff;
+  box-shadow: 2px 0 4px -2px rgba(0, 0, 0, 0.08);
+}
+
+.wt-my-tasks__table thead th.wt-my-tasks__table-index {
+  z-index: 2;
+}
+
+.wt-my-tasks__table tbody tr:hover .wt-my-tasks__table-index {
+  background: #fafcff;
+}
+
+.wt-my-tasks__priority-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fff1b8;
+  color: #ad6800;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.wt-my-tasks__table .wt-my-tasks__priority-pill {
+  font-size: 11px;
+}
+
+.wt-my-tasks__table-title {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wt-my-tasks__board {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.wt-my-tasks__column {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  min-height: 0;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.wt-my-tasks__column--drop {
+  border-color: #91caff;
+  background: #f0f7ff;
+}
+
+.wt-my-tasks__column-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.wt-my-tasks__column-progress {
+  flex: 0 0 auto;
+}
+
+.wt-my-tasks__column-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.wt-my-tasks__card-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wt-my-tasks__add-trigger {
+  flex: 0 0 auto;
+  padding: 6px 0 2px !important;
+  height: auto !important;
+  justify-content: flex-start !important;
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.wt-my-tasks__card-shell {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.wt-my-tasks__card-grip {
+  flex: 0 0 28px;
+  width: 28px;
+  min-height: 48px;
+  border-radius: 4px 0 0 4px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  user-select: none;
+}
+
+.wt-my-tasks__card-grip:active {
+  cursor: grabbing;
+}
+
+.wt-my-tasks__card-grip-icon {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+}
+
+.wt-my-tasks__card-shell--drop-before {
+  box-shadow: inset 0 3px 0 #1677ff;
+  border-radius: 4px 0 0 4px;
+}
+
+.wt-my-tasks__card {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 1px solid #f0f0f0;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background: #fff;
+  padding: 10px 10px 10px 12px;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+
+.wt-my-tasks__card-shell:hover .wt-my-tasks__card {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+.wt-my-tasks__card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.wt-my-tasks__card-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 1.35;
+}
+
+.wt-my-tasks__card-more {
+  flex: 0 0 auto;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.wt-my-tasks__card-shell:hover .wt-my-tasks__card-more {
+  opacity: 1;
+}
+
+.wt-my-tasks__card-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.wt-my-tasks__status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #f5f5f5;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.wt-my-tasks__status-pill--pink {
+  background: #ff85c0;
+  color: #fff;
+}
+
+.wt-my-tasks__status-pill--green {
+  background: #d9f7be;
+  color: #389e0d;
+}
+
+.wt-my-tasks__status-pill__icon {
+  font-size: 10px;
+}
+
+.wt-my-tasks__card-avatar {
+  flex-shrink: 0;
+  background: #ffccc7 !important;
+  color: #cf1322 !important;
+}
+
+.wt-my-tasks__card-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.wt-my-tasks__card-pills-row--second {
+  margin-top: -4px;
+  justify-content: flex-start;
+}
+
+.wt-my-tasks__pill {
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.4;
+  background: #f5f5f5;
+  color: rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wt-my-tasks__pill--deadline {
+  background: #ffe7ef;
+  color: #cf1322;
+}
+
+.wt-my-tasks__pill--muted {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.wt-my-tasks__pill--block {
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+
+.wt-my-tasks-detail {
+  padding-top: 4px;
+}
+
+.wt-my-tasks-detail__row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.wt-my-tasks-detail__desc {
+  padding-top: 12px;
+}
+
+.wt-my-tasks__add-btn {
+  justify-content: flex-start !important;
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+
+.wt-my-tasks__column-empty {
+  min-height: 56px;
+  border: 1px dashed #d9d9d9;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-my-tasks__inline-add {
+  flex: 0 0 auto;
+  margin-top: 8px;
+  padding: 10px 10px 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.wt-my-tasks__inline-add-text.ant-input {
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.wt-my-tasks__inline-add-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.wt-my-tasks__inline-add-type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.wt-my-tasks__inline-add-star {
+  color: #fadb14;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.wt-my-tasks__inline-add-type-select {
+  min-width: 0;
+  flex: 1 1 100px;
+  max-width: 200px;
+}
+
+.wt-my-tasks__inline-add-type-select .ant-select-selector {
+  padding-inline-start: 2px !important;
+}
+
+.wt-my-tasks__inline-add-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.wt-my-tasks__inline-add-picker.ant-picker {
+  border-radius: 999px;
+  border-style: dashed;
+}
+
+.wt-my-tasks__inline-add-avatar {
+  cursor: pointer;
+}
+
+.wt-my-tasks__inline-add-actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wt-my-tasks__empty-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* —— 筛选条件 —— */
+.wt-my-tasks__filter-trigger {
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(0, 0, 0, 0.45) !important;
+  padding-inline: 8px;
+}
+
+.wt-my-tasks__filter-trigger--active {
+  background: #e6f4ff !important;
+  color: #1677ff !important;
+}
+
+.wt-my-tasks__filter-panel__date {
+  min-width: 160px;
+}
+
+.wt-my-tasks__filter-panel {
+  width: min(100vw - 24px, 600px);
+  padding: 4px 0 0;
+}
+
+.wt-my-tasks__filter-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-right: 2px;
+}
+
+.wt-my-tasks__filter-panel__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wt-my-tasks__filter-panel__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.wt-my-tasks__filter-panel__when {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.wt-my-tasks__filter-panel__add {
+  padding-left: 0;
+  margin-top: 4px;
+}
+
+.wt-my-tasks__filter-panel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* —— 我的任务：仅内容区骨架 —— */
+.wt-my-tasks__content-skeleton {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wt-my-tasks__table-wrap--skeleton {
+  overflow: hidden;
+}
+
+.wt-my-tasks-table-skeleton {
+  min-width: 1460px;
+  border: 1px solid #f0f0f0;
+  background: #fff;
+}
+
+.wt-my-tasks-table-skeleton__thead,
+.wt-my-tasks-table-skeleton__row {
+  display: grid;
+  grid-template-columns: 36px 100px minmax(140px, 1.2fr) 72px 72px 100px 100px 64px 96px 96px 72px 72px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+}
+
+.wt-my-tasks-table-skeleton__thead {
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.wt-my-tasks-table-skeleton__row {
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.wt-my-tasks-table-skeleton__row:last-child {
+  border-bottom: none;
+}
+
+.wt-my-tasks__table-pagination--skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+}
+
+.wt-my-tasks__board--skeleton {
+  pointer-events: none;
+}
+
+.wt-my-tasks-board-skeleton__column {
+  pointer-events: none;
+}
+
+.wt-my-tasks-board-skeleton__card {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.wt-my-tasks-board-skeleton__card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}

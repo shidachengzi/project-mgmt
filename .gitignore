@@ -1,0 +1,41 @@
+# Dependencies (all packages under repo)
+node_modules/
+**/node_modules/
+
+# Next.js / Vite build & cache
+backend/.next/
+**/.next/
+web/dist/
+.cache/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+backend/.env
+web/.env
+web/.env.local
+
+# Build outputs
+dist/
+build/
+backend/.next/
+web/dist/
+*.tsbuildinfo
+
+# Logs & OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Uploads & runtime
+backend/public/im-uploads/
+*.local
+
+# Prisma (generated client is in node_modules; keep migrations tracked)

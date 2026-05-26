@@ -1,0 +1,298 @@
+.wt-calendar-settings {
+  display: flex;
+  min-height: calc(100vh - 120px);
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.wt-calendar-settings--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.wt-calendar-settings__sider {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 12px 0;
+  background: #fafafa;
+}
+
+.wt-calendar-settings__back {
+  margin: 0 12px 16px;
+  padding: 4px 8px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.wt-calendar-settings__nav-group {
+  margin-bottom: 16px;
+}
+
+.wt-calendar-settings__nav-group-title {
+  padding: 4px 16px 8px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.wt-calendar-settings__nav-item {
+  display: block;
+  padding: 8px 16px 8px 20px;
+  color: rgba(0, 0, 0, 0.75);
+  text-decoration: none;
+  font-size: 14px;
+  border-left: 3px solid transparent;
+}
+
+.wt-calendar-settings__nav-item:hover {
+  color: #1677ff;
+  background: rgba(22, 119, 255, 0.06);
+}
+
+.wt-calendar-settings__nav-item--active {
+  color: #1677ff;
+  background: #e6f4ff;
+  border-left-color: #1677ff;
+  font-weight: 500;
+}
+
+.wt-calendar-settings__content {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 24px 32px;
+}
+
+.wt-calendar-settings__content-inner {
+  max-width: 960px;
+}
+
+.wt-calendar-settings__main-title {
+  margin: 0 0 16px !important;
+}
+
+.wt-calendar-settings__main-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.wt-calendar-settings__main-toolbar {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.wt-calendar-settings__table .ant-table-thead > tr > th {
+  background: #fafafa;
+}
+
+.wt-calendar-settings__table-cb {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.wt-calendar-settings__main-foot {
+  margin-top: 24px;
+}
+
+.wt-calendar-settings__field {
+  margin-bottom: 18px;
+}
+
+.wt-calendar-settings__label {
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+/* —— 日历成员页（对齐参考布局） —— */
+.wt-calendar-settings__main--members {
+  padding-top: 0;
+}
+
+.wt-calendar-settings__members-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.wt-calendar-settings__members-page-title {
+  margin: 0 !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.wt-calendar-settings__members-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.wt-calendar-settings__members-search {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+.wt-calendar-settings__search-icon {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.wt-calendar-settings__members-count-text {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.wt-calendar-settings__members-batch-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: #fafafa;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+.wt-calendar-settings__members-batch-bar__count {
+  margin: 0 !important;
+  white-space: nowrap;
+}
+
+.wt-calendar-settings__members-batch-bar__grow {
+  flex: 1;
+  min-width: 8px;
+}
+
+.wt-calendar-settings__members-table .ant-table {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.wt-calendar-settings__members-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.wt-calendar-settings__members-table .ant-table-tbody > tr > td {
+  font-size: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.wt-calendar-settings__members-table .ant-table-tbody > tr:last-child > td {
+  border-bottom: none;
+}
+
+.wt-calendar-settings__members-table .ant-table-selection-column {
+  padding-inline-start: 16px !important;
+}
+
+.wt-calendar-settings__members-table .ant-pagination {
+  font-size: 12px;
+}
+
+/* —— 提醒设置 —— */
+.wt-calendar-settings__main--reminders {
+  padding-top: 0;
+}
+
+.wt-calendar-settings__reminder-tips {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  background: #fff7f6 !important;
+  border-color: #ffccc7 !important;
+}
+
+.wt-calendar-settings__reminder-tips .ant-alert-icon {
+  color: #fa8c16;
+}
+
+.wt-calendar-settings__reminder-method-tag {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.65);
+  background: #f5f5f5;
+  border-color: #d9d9d9;
+}
+
+.wt-calendar-settings__reminders-table .ant-table {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wt-calendar-settings__reminders-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 500;
+}
+
+/* —— 高级设置 / 危险区 —— */
+.wt-calendar-settings__main--advanced {
+  padding-top: 0;
+}
+
+.wt-calendar-settings__danger-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 28px;
+  min-height: 24px;
+}
+
+.wt-calendar-settings__danger-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px dashed rgba(255, 77, 79, 0.45);
+  pointer-events: none;
+}
+
+.wt-calendar-settings__danger-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #cf1322;
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 999px;
+}
+
+.wt-calendar-settings__danger-badge .anticon {
+  font-size: 12px;
+}
+
+.wt-calendar-settings__danger-block {
+  max-width: 560px;
+}
+
+.wt-calendar-settings__danger-title {
+  margin: 0 0 8px !important;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.wt-calendar-settings__danger-desc {
+  margin-bottom: 16px !important;
+}
+

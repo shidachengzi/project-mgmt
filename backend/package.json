@@ -1,0 +1,50 @@
+{
+  "name": "project-mgmt-backend",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "postinstall": "prisma generate",
+    "dev": "next dev",
+    "dev:im-socket": "node ./node_modules/tsx/dist/cli.mjs ./src/im/imSocketServer.ts",
+    "dev:stack": "concurrently -k -n api,im -c cyan,magenta \"next dev\" \"node ./node_modules/tsx/dist/cli.mjs ./src/im/imSocketServer.ts\"",
+    "start:stack": "concurrently -k -n api,im -c cyan,magenta \"next start\" \"node ./node_modules/tsx/dist/cli.mjs ./src/im/imSocketServer.ts\"",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:check-migrations": "node scripts/check-migration-folders.cjs",
+    "db:prune-empty-migrations": "node scripts/check-migration-folders.cjs --fix",
+    "db:setup:local": "node scripts/run-setup-local-db.mjs",
+    "db:seed": "node prisma/seed.js",
+    "db:prune-im": "node scripts/prune-im-direct-messages.mjs",
+    "deadline-reminder:once": "node ./node_modules/tsx/dist/cli.mjs ./scripts/run-deadline-reminders-once.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "bcryptjs": "^2.4.3",
+    "cookie": "^1.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.0",
+    "next": "^15.3.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.16",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io": "^4.8.1",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.15.3",
+    "@types/node-cron": "^3.0.11",
+    "@types/nodemailer": "^6.4.17",
+    "@types/react": "19.2.14",
+    "concurrently": "^9.1.2",
+    "prisma": "^6.7.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.7.2"
+  }
+}

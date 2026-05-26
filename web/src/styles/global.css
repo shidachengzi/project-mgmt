@@ -1,0 +1,506 @@
+:root {
+  --wt-primary-sider-bg: #303539;
+  --wt-primary-sider-active: #1890ff;
+  --wt-border: #f0f0f0;
+  --wt-text-secondary: #8c8c8c;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: #fff;
+}
+
+.wt-route-outlet {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  /* Allow route pages (e.g. 项目概览) to scroll; flex parent Content already uses min-height:0 */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wt-primary-sider {
+  position: relative;
+  background: var(--wt-primary-sider-bg) !important;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.wt-primary-sider > .ant-layout-sider-children {
+  height: 100%;
+}
+
+.wt-primary-sider.ant-layout-sider-collapsed .wt-primary-nav__team {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  overflow: hidden;
+}
+
+.wt-primary-sider.ant-layout-sider-collapsed .wt-primary-nav__item {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+.wt-primary-sider.ant-layout-sider-collapsed .wt-primary-nav__item-label {
+  display: none;
+}
+
+.wt-primary-sider.ant-layout-sider-collapsed .wt-primary-nav__item .anticon {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.wt-primary-sider.ant-layout-sider-collapsed .wt-primary-nav__item--active .anticon {
+  color: #fff;
+}
+
+.wt-primary-sider .ant-layout-sider-trigger,
+.wt-primary-sider .ant-layout-sider-trigger .anticon {
+  color: #fff !important;
+}
+
+.wt-sider-collapse-trigger--dark.ant-btn,
+.wt-sider-collapse-trigger--dark.ant-btn .anticon {
+  color: #fff !important;
+}
+
+.wt-sider-collapse-trigger--dark.ant-btn:hover,
+.wt-sider-collapse-trigger--dark.ant-btn:hover .anticon {
+  color: #fff !important;
+  opacity: 0.85;
+}
+
+.wt-sider-collapse-trigger.ant-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-primary-nav {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  padding: 12px 0 52px;
+  gap: 4px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.wt-secondary-sider__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: calc(100vh - 56px);
+}
+
+.wt-sider-collapse-footer {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.wt-primary-sider.ant-layout-sider-collapsed .wt-sider-collapse-footer {
+  right: 8px;
+}
+
+.wt-primary-nav__team {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+  padding: 0 8px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.wt-primary-nav__item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  border-radius: 0;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  box-sizing: border-box;
+}
+
+.wt-primary-nav__item:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.wt-primary-nav__item--active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.wt-primary-nav__item .anticon {
+  font-size: 18px;
+  min-width: 18px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.wt-primary-nav__item--active .anticon {
+  color: #fff;
+}
+
+.wt-secondary-sider .ant-menu-item {
+  height: 40px;
+  line-height: 40px;
+  margin: 2px 8px !important;
+  width: calc(100% - 16px) !important;
+  border-radius: 4px !important;
+}
+
+.wt-secondary-sider {
+  position: relative;
+}
+
+.wt-secondary-sider.ant-layout-sider {
+  flex: 0 0 232px !important;
+  width: 232px !important;
+  min-width: 232px !important;
+  max-width: 232px !important;
+}
+
+.wt-secondary-sider.ant-layout-sider-collapsed {
+  flex: 0 0 48px !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+}
+
+.wt-secondary-sider .ant-menu-item-selected {
+  background: #e6f4ff !important;
+  color: #1677ff !important;
+}
+
+.wt-secondary-sider .ant-menu-submenu-title {
+  padding-inline: 16px !important;
+  color: var(--wt-text-secondary) !important;
+  font-size: 12px;
+  height: 36px !important;
+  line-height: 36px !important;
+  margin-top: 8px !important;
+}
+
+.wt-project-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.wt-project-mini__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.wt-main-header {
+  border-bottom: 1px solid var(--wt-border);
+  padding: 0 20px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.wt-main-header__left {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.wt-main-header .ant-space {
+  align-items: center;
+}
+
+.wt-main-header__avatar-btn {
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.wt-main-header__avatar-btn:hover {
+  opacity: 0.85;
+}
+
+.wt-main-header__avatar.ant-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  line-height: 32px !important;
+  font-size: 12px !important;
+  flex-shrink: 0;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-main-header__avatar.ant-avatar:not(.ant-avatar-image) {
+  background: #1677ff;
+  color: #fff;
+}
+
+.wt-main-header__avatar.ant-avatar .ant-avatar-image,
+.wt-main-header__avatar.ant-avatar .ant-avatar-image img,
+.wt-main-header__avatar.ant-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wt-profile-popover__mask {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+}
+
+.wt-profile-popover__panel {
+  position: absolute;
+  top: 58px;
+  right: 12px;
+  width: 300px;
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.wt-profile-popover__banner {
+  height: 90px;
+  background: linear-gradient(120deg, #5a9cff 0%, #4a86dd 100%);
+}
+
+.wt-profile-popover__body {
+  padding: 0 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.wt-profile-popover__avatar {
+  position: relative;
+  z-index: 1;
+  margin-top: -36px;
+  width: 72px !important;
+  height: 72px !important;
+  min-width: 72px !important;
+  line-height: 72px !important;
+  font-size: 18px;
+  flex-shrink: 0;
+  border: 3px solid #fff;
+  box-sizing: border-box;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-profile-popover__avatar.ant-avatar:not(.ant-avatar-image) {
+  background: #f28888;
+  color: #fff;
+}
+
+.wt-profile-popover__avatar.ant-avatar-image {
+  background: #fff !important;
+}
+
+.wt-profile-popover__avatar.ant-avatar .ant-avatar-image,
+.wt-profile-popover__avatar.ant-avatar .ant-avatar-image img,
+.wt-profile-popover__avatar.ant-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wt-profile-popover__name {
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.88);
+}
+
+.wt-profile-popover__team {
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.wt-profile-popover__item.ant-btn {
+  justify-content: flex-start;
+  height: 34px;
+  font-size: 13px;
+  padding-inline: 0 !important;
+}
+
+.wt-profile-popover__item .anticon {
+  font-size: 14px;
+}
+
+.wt-profile-popover__item--danger.ant-btn {
+  color: #ff4d4f !important;
+}
+
+.wt-system-message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wt-system-message-item {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.wt-system-message-item--unread {
+  border-color: #91caff;
+  background: #f6fbff;
+}
+
+.wt-system-message-item__peer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.wt-system-message-item__peer-avatar.ant-avatar {
+  flex-shrink: 0;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  line-height: 32px !important;
+  font-size: 12px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-system-message-item__peer-avatar.ant-avatar .ant-avatar-image,
+.wt-system-message-item__peer-avatar.ant-avatar .ant-avatar-image img,
+.wt-system-message-item__peer-avatar.ant-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wt-system-message-item__peer-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.wt-system-message-item__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.wt-system-message-item__preview {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.wt-my-tasks-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+}
+
+.wt-my-tasks-header-nav__crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.88);
+  cursor: pointer;
+}
+
+.wt-my-tasks-header-nav__crumb .anticon {
+  color: #1677ff;
+  font-size: 16px;
+}
+
+.wt-my-tasks-header-nav__sep.anticon {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+}
+
+.wt-my-tasks-header-nav__divider {
+  width: 1px;
+  height: 18px;
+  background: #e8e8e8;
+}
+
+.wt-my-tasks-header-nav__tab {
+  border: none;
+  background: transparent;
+  height: 56px;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.78);
+}
+
+.wt-my-tasks-header-nav__tab--active {
+  color: #1677ff;
+  border-bottom-color: #1677ff;
+}

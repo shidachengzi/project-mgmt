@@ -1,0 +1,31 @@
+/* Admin Console: clean list-style tables (no outer borders) */
+.wt-console-table .ant-table {
+  background: transparent;
+}
+
+.wt-console-table .ant-table-container,
+.wt-console-table .ant-table-content {
+  border: none !important;
+}
+
+.wt-console-table .ant-table-thead > tr > th {
+  background: #fff !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.wt-console-table .ant-table-tbody > tr > td {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.wt-console-table .ant-table-thead > tr > th::before {
+  display: none !important;
+}
+
+.wt-console-member--disabled > td {
+  color: rgba(0, 0, 0, 0.35) !important;
+  background: #fafafa !important;
+}
+
+.wt-console-member--disabled .ant-btn {
+  opacity: 0.6;
+}

@@ -1,0 +1,361 @@
+/* 登录 / 找回密码（LoginPage、ForgotPasswordPage）— 由 app/styles/importGlobalStyles 统一引入 */
+.login-page-root {
+  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #1a1a2e;
+  overflow: auto;
+}
+
+.login-page-root *,
+.login-page-root *::before,
+.login-page-root *::after {
+  box-sizing: border-box;
+}
+
+.login-page-root .login-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.login-page-root .left-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #d4d0dc 0%, #c8c4d0 50%, #bbb7c5 100%);
+  padding: 40px 48px;
+  overflow: hidden;
+}
+
+.login-page-root .left-panel .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  z-index: 10;
+  position: relative;
+}
+
+.login-page-root .left-panel .logo svg {
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 4px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.login-page-root .characters-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 420px;
+}
+
+.login-page-root .left-panel .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  font-size: 13px;
+  color: rgba(80, 70, 90, 0.7);
+  z-index: 10;
+  position: relative;
+}
+
+.login-page-root .left-panel .footer-links span {
+  color: inherit;
+}
+
+.login-page-root .left-panel::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 15%;
+  width: 260px;
+  height: 260px;
+  background: rgba(180, 170, 200, 0.25);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.login-page-root .left-panel::before {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  left: 10%;
+  width: 350px;
+  height: 350px;
+  background: rgba(200, 195, 210, 0.2);
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.login-page-root .right-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 40px;
+}
+
+.login-page-root .form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-page-root .sparkle-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.login-page-root .sparkle-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.login-page-root .form-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-page-root .form-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+  margin: 0 0 6px;
+}
+
+.login-page-root .form-header p {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.login-page-root .form-group {
+  margin-bottom: 20px;
+}
+
+.login-page-root .form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.login-page-root .form-group .input-wrapper {
+  position: relative;
+}
+
+.login-page-root .form-group input {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-bottom: 1.5px solid #e0e0e0;
+  padding: 0 40px 0 0;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1a1a2e;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.login-page-root .form-group input:focus {
+  border-bottom-color: #5b21b6;
+}
+
+.login-page-root .form-group input::placeholder {
+  color: #ccc;
+}
+
+.login-page-root .form-group input[type='password']:not(:placeholder-shown) {
+  letter-spacing: 2px;
+}
+
+.login-page-root .toggle-password {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  line-height: 0;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.login-page-root .toggle-password svg {
+  display: block;
+  pointer-events: none;
+}
+
+.login-page-root .toggle-password:hover {
+  color: #333;
+}
+
+.login-page-root .btn-login {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s;
+  border: 1.5px solid #1a1a2e;
+  background: #1a1a2e;
+  color: #fff;
+  margin-top: 8px;
+}
+
+.login-page-root .btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login-page-root .btn-login .btn-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.login-page-root .btn-login .btn-hover-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #5b21b6;
+  color: #fff;
+  opacity: 0;
+  transition: all 0.3s;
+  border-radius: 25px;
+}
+
+.login-page-root .btn-login:hover:not(:disabled) .btn-text {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+.login-page-root .btn-login:hover:not(:disabled) .btn-hover-content {
+  opacity: 1;
+}
+
+.login-page-root .error-msg {
+  display: none;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.login-page-root .error-msg.show {
+  display: block;
+}
+
+.login-page-root .form-group input.error {
+  border-bottom-color: #dc2626;
+}
+
+.login-page-root .form-group label.error-label {
+  color: #dc2626;
+}
+
+.login-page-root .login-forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px 0 16px;
+}
+
+.login-page-root a.forgot-link,
+.login-page-root .forgot-link {
+  font-size: 13px;
+  color: #5b21b6 !important;
+  text-decoration: none;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.login-page-root a.forgot-link:hover,
+.login-page-root .forgot-link:hover {
+  color: #4c1d95 !important;
+  text-decoration: underline;
+}
+
+.login-page-root .login-form-footer-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-page-root .login-form-footer-link a {
+  color: #5b21b6;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.login-page-root .login-form-footer-link a:hover {
+  text-decoration: underline;
+}
+
+.login-page-root .login-form-footer-sep {
+  margin: 0 8px;
+  color: #ccc;
+}
+
+.login-page-root .login-inline-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 14px;
+  color: #5b21b6;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.login-page-root .login-inline-btn:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.login-page-root .login-inline-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .login-page-root .login-split {
+    grid-template-columns: 1fr;
+  }
+
+  .login-page-root .left-panel {
+    display: none;
+  }
+}

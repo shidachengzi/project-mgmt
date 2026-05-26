@@ -1,0 +1,156 @@
+.wt-account-settings {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: #f5f6f8;
+  padding: 10px 12px;
+}
+
+.wt-account-settings__tabs {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding: 0 12px;
+  margin-bottom: 10px;
+}
+
+.wt-account-settings__tabs .ant-tabs-nav {
+  margin: 0;
+}
+
+.wt-account-settings__tabs .ant-tabs-tab {
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+.wt-account-settings__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wt-account-settings__stack--logs {
+  flex: 1;
+  min-height: 0;
+}
+
+.wt-account-settings__card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding: 10px 12px 12px;
+}
+
+.wt-account-settings__card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wt-account-settings__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.88);
+  margin-bottom: 4px;
+}
+
+.wt-account-settings__desc {
+  font-size: 12px;
+}
+
+.wt-account-settings__toggle {
+  border: none;
+  background: transparent;
+  color: #1677ff;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+}
+
+.wt-account-settings__form {
+  margin-top: 8px;
+  max-width: 520px;
+}
+
+.wt-account-settings__form .ant-form-item {
+  margin-bottom: 8px;
+}
+
+.wt-account-settings__hint {
+  font-size: 12px;
+}
+
+.wt-account-settings__placeholder {
+  border: 1px dashed #d9d9d9;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.45);
+  border-radius: 4px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.wt-account-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wt-account-profile__avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.wt-account-profile__avatar-wrap {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wt-account-profile__upload {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.wt-account-profile__upload-hint {
+  font-size: 12px;
+}
+
+.wt-account-profile__section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.wt-account-settings__log-table .ant-table-thead > tr > th {
+  font-weight: 600;
+}
+
+/* 访问日志：限制表格区域高度，表体内部滚动（顶栏 + 面包屑 + 分页等预留约 280px） */
+.wt-account-settings__logs-panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wt-account-settings__logs-panel .ant-spin-nested-loading,
+.wt-account-settings__logs-panel .ant-spin-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}

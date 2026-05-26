@@ -1,0 +1,421 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 说明：小皮等环境常见 InnoDB 索引上限约 1000 bytes；utf8mb4 下单列索引最多约 191 字符，
+// 复合索引需缩短列宽（两列 VARCHAR(191) 会触发 Error 1071）。
+
+model Department {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  parentId  String?  @db.VarChar(30)
+  name      String   @db.VarChar(191)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent   Department?  @relation("DepartmentChildren", fields: [parentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  children Department[] @relation("DepartmentChildren")
+  users    User[]
+
+  @@index([parentId])
+  @@map("departments")
+}
+
+model JobTitle {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  name      String   @unique @db.VarChar(191)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("job_titles")
+}
+
+model User {
+  id           String   @id @default(cuid()) @db.VarChar(30)
+  name         String   @db.VarChar(191)
+  username     String?  @unique @db.VarChar(64)
+  email        String?  @unique @db.VarChar(191)
+  mobile       String?  @unique @db.VarChar(191)
+  employeeCode String?  @unique @db.VarChar(64)
+  jobTitle     String?  @db.VarChar(191)
+  departmentId String?  @db.VarChar(30)
+  passwordHash String   @db.VarChar(128)
+  status       String   @default("active") @db.VarChar(32)
+  /// 用户级偏好（JSON）：如 myTasksBoardV2 看板列顺序等
+  preferences  Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  department  Department?      @relation(fields: [departmentId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  systemRoles UserSystemRole[]
+  sessions    Session[]
+  memberships ProjectMember[]
+  ownedProjectTasks ProjectTask[] @relation("ProjectTaskOwner")
+  createdProjectTasks ProjectTask[] @relation("ProjectTaskCreator")
+  ownedCalendars           UserCalendar[]
+  organizedCalendarEvents UserCalendarEvent[] @relation("CalendarEventOrganizer")
+  notifications            UserNotification[]
+  passwordResetCodes       PasswordResetCode[]
+  accessLogs               UserAccessLog[]
+
+  @@map("users")
+}
+
+/// 用户访问轨迹（页面导航、登录等），用于账号设置「访问日志」
+model UserAccessLog {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  userId    String   @db.VarChar(30)
+  path      String   @db.VarChar(512)
+  userAgent String?  @db.VarChar(8000)
+  ip        String?  @db.VarChar(64)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("user_access_logs")
+}
+
+/// 找回密码邮箱验证码（短期有效，一次性）
+model PasswordResetCode {
+  id        String    @id @default(cuid()) @db.VarChar(30)
+  userId    String    @db.VarChar(30)
+  email     String    @db.VarChar(191)
+  codeHash  String    @db.VarChar(128)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([email, createdAt])
+  @@map("password_reset_codes")
+}
+
+/// 站内一对一 IM（服务端持久化；可用 npm run db:prune-im + IM_RETENTION_DAYS 控制表体积）
+model ImDirectMessage {
+  id          String   @id @default(cuid()) @db.VarChar(30)
+  fromUserId  String   @db.VarChar(30)
+  toUserId    String   @db.VarChar(30)
+  clientMsgId String   @db.VarChar(128)
+  text        String   @db.VarChar(8000)
+  createdAt   DateTime @default(now())
+  /// 附件：与 text 可同时存在（正文作说明）；纯文件时 text 可为空串
+  attachmentUrl   String? @db.VarChar(1024)
+  attachmentName  String? @db.VarChar(255)
+  attachmentSize  Int?
+  mimeType        String? @db.VarChar(128)
+
+  @@unique([fromUserId, clientMsgId])
+  @@index([toUserId, createdAt])
+  @@index([fromUserId, toUserId, createdAt])
+  @@map("im_direct_messages")
+}
+
+model SystemRoleGroup {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  key       String   @unique @db.VarChar(64)
+  name      String   @db.VarChar(191)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles SystemRole[]
+
+  @@map("system_role_groups")
+}
+
+model SystemRole {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  key       String   @unique @db.VarChar(64)
+  name      String   @db.VarChar(191)
+  note      String?  @db.VarChar(191)
+  groupId   String?  @db.VarChar(30)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  group       SystemRoleGroup?       @relation(fields: [groupId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  users       UserSystemRole[]
+  permissions RoleSystemPermission[]
+
+  @@map("system_roles")
+}
+
+model SystemPermission {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  key       String   @unique @db.VarChar(128)
+  label     String   @db.VarChar(191)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles RoleSystemPermission[]
+
+  @@map("system_permissions")
+}
+
+model UserSystemRole {
+  userId     String   @db.VarChar(30)
+  roleId     String   @db.VarChar(30)
+  assignedAt DateTime @default(now())
+
+  user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role SystemRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@map("user_system_roles")
+}
+
+model RoleSystemPermission {
+  roleId       String   @db.VarChar(30)
+  permissionId String   @db.VarChar(30)
+  assignedAt   DateTime @default(now())
+
+  role       SystemRole       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission SystemPermission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("role_system_permissions")
+}
+
+model Project {
+  id          String   @id @db.VarChar(36)
+  title       String   @db.VarChar(191)
+  visibility  String   @default("private") @db.VarChar(32)
+  ownerUserId String?  @db.VarChar(30)
+  archived    Boolean  @default(false)
+  /// 封面：gradient 为默认渐变；image 时 coverImageData 存 data URL 或外链
+  coverKind      String  @default("gradient") @db.VarChar(16)
+  coverImageData String? @db.LongText
+  /// 工作区快照（JSON）：overview、attachments、overviewActivities、activityByKey、commentsByKey、taskParticipantsByKey、taskAttachmentsByKey、targetRelatedTasksByKey、targetAttachmentsByKey（见 projectWorkspaceService）
+  workspace   Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  roles       ProjectRole[]
+  permissions ProjectPermission[]
+  members     ProjectMember[]
+  tasks       ProjectTask[]
+
+  @@map("projects")
+}
+
+model ProjectTask {
+  id          String    @id @default(cuid()) @db.VarChar(30)
+  projectId   String    @db.VarChar(36)
+  parentId    String?   @db.VarChar(30)
+  sortOrder   Int       @default(0)
+  kind        String    @default("task") @db.VarChar(16)
+  title       String    @db.VarChar(191)
+  status      String    @default("未开始") @db.VarChar(64)
+  priority    String    @default("普通") @db.VarChar(32)
+  startDate   DateTime?
+  endDate     DateTime?
+  ownerUserId String?   @db.VarChar(30)
+  /// 创建人（新建任务/目标时写入，用于「我创建的」）
+  createdByUserId String? @db.VarChar(30)
+  stageTitle  String?   @db.VarChar(191)
+  description String?   @db.Text
+  progress    Int       @default(0)
+  attachments Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  project Project  @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  parent  ProjectTask? @relation("ProjectTaskHierarchy", fields: [parentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  children ProjectTask[] @relation("ProjectTaskHierarchy")
+  owner   User?    @relation("ProjectTaskOwner", fields: [ownerUserId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  creator User?    @relation("ProjectTaskCreator", fields: [createdByUserId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  @@index([projectId])
+  @@index([projectId, parentId])
+  @@index([ownerUserId])
+  @@index([createdByUserId])
+  @@map("project_tasks")
+}
+
+model ProjectRole {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  projectId String   @db.VarChar(36)
+  key       String   @db.VarChar(64)
+  name      String   @db.VarChar(191)
+  note      String?  @db.VarChar(191)
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project     Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  members     ProjectMemberRole[]
+  permissions ProjectRolePermission[]
+
+  @@unique([projectId, key])
+  @@map("project_roles")
+}
+
+model ProjectPermission {
+  id           String   @id @default(cuid()) @db.VarChar(30)
+  projectId    String   @db.VarChar(36)
+  key          String   @db.VarChar(214)
+  sectionTitle String   @db.VarChar(64)
+  itemLabel    String   @db.VarChar(64)
+  createdAt    DateTime @default(now())
+
+  project Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  roles   ProjectRolePermission[]
+
+  @@unique([projectId, key])
+  @@map("project_permissions")
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  projectId String   @db.VarChar(36)
+  userId    String   @db.VarChar(30)
+  joinedAt  DateTime @default(now())
+
+  project Project             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roles   ProjectMemberRole[]
+
+  @@unique([projectId, userId])
+  @@map("project_members")
+}
+
+model ProjectMemberRole {
+  memberId   String   @db.VarChar(30)
+  roleId     String   @db.VarChar(30)
+  assignedAt DateTime @default(now())
+
+  member ProjectMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  role   ProjectRole   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([memberId, roleId])
+  @@map("project_member_roles")
+}
+
+model ProjectRolePermission {
+  roleId       String   @db.VarChar(30)
+  permissionId String   @db.VarChar(30)
+  assignedAt   DateTime @default(now())
+
+  role       ProjectRole       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission ProjectPermission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("project_role_permissions")
+}
+
+model Session {
+  id           String   @id @default(cuid()) @db.VarChar(30)
+  userId       String   @db.VarChar(30)
+  // 唯一索引：utf8mb4 下索引约 1000 bytes → 单列最长约 250（512 会触发 1071）
+  refreshToken String   @unique @db.VarChar(250)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+/// 用户自定义日历（私有 / 团队）
+model UserCalendar {
+  id          String   @id @default(cuid()) @db.VarChar(30)
+  ownerUserId String   @db.VarChar(30)
+  name        String   @db.VarChar(191)
+  color       String   @db.VarChar(32)
+  visibility  String   @db.VarChar(32)
+  memberIds   Json
+  /// 非所有者成员权限：editor 可增改删日程；viewer 只读。缺省为 editor
+  memberAccess Json    @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  owner  User                  @relation(fields: [ownerUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  events UserCalendarEvent[]
+
+  @@unique([ownerUserId, name])
+  @@index([ownerUserId])
+  @@map("user_calendars")
+}
+
+model UserCalendarEvent {
+  id             String   @id @default(cuid()) @db.VarChar(30)
+  calendarId     String   @db.VarChar(30)
+  ownerUserId    String   @db.VarChar(30)
+  title          String   @db.VarChar(191)
+  startAt        DateTime
+  endAt          DateTime
+  allDay         Boolean  @default(false)
+  repeatRule     String?  @db.Text
+  participantIds Json
+  location       String?  @db.VarChar(191)
+  description    String?  @db.Text
+  reminders      Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  calendar UserCalendar @relation(fields: [calendarId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  organizer User        @relation("CalendarEventOrganizer", fields: [ownerUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([calendarId])
+  @@index([ownerUserId])
+  @@index([startAt])
+  @@map("user_calendar_events")
+}
+
+/// 全局 SMTP（单例 id=default）；host+from 齐全时优先于环境变量；在「项目管理系统」中维护
+model SystemMailConfig {
+  id               String   @id @db.VarChar(32)
+  smtpHost         String?  @map("smtp_host") @db.VarChar(191)
+  smtpPort         Int      @default(587) @map("smtp_port")
+  smtpSecure       Boolean  @default(false) @map("smtp_secure")
+  /// true 时 TLS 不校验证书（内网/自签；生产慎用）
+  smtpTlsSkipVerify Boolean @default(false) @map("smtp_tls_skip_verify")
+  smtpFrom         String?  @map("smtp_from") @db.VarChar(191)
+  smtpUser         String?  @map("smtp_user") @db.VarChar(191)
+  smtpPassCipher   String?  @map("smtp_pass_cipher") @db.Text
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("system_mail_config")
+}
+
+/// 提醒邮件等渠道投递去重（dedupeKey 全局唯一）
+model ReminderDispatchLog {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  dedupeKey String   @unique @db.VarChar(191)
+  createdAt DateTime @default(now())
+
+  @@map("reminder_dispatch_logs")
+}
+
+/// 站内通知（系统全员 / 项目成员），按用户一条记录，支持已读与类型筛选
+model UserNotification {
+  id        String    @id @default(cuid()) @db.VarChar(30)
+  userId    String    @db.VarChar(30)
+  /// system | project
+  category  String    @db.VarChar(16)
+  /// maintenance | security | announcement | calendar_event | project_member_added | … | *_reminder 等
+  type      String    @db.VarChar(32)
+  title     String    @db.VarChar(191)
+  body      String?   @db.Text
+  readAt    DateTime?
+  projectId String?   @db.VarChar(36)
+  taskId    String?   @db.VarChar(30)
+  eventId   String?   @db.VarChar(30)
+  metadata  Json?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([userId, category, readAt])
+  @@map("user_notifications")
+}
