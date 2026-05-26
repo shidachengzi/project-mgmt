@@ -21,10 +21,10 @@
 -->
 
 > 单张图居中并限制宽度可用 HTML：  
-> `<p align="center"><img src="docs/images/project.png" alt="" width="720" /><p>`
-> `<p align="center"><img src="docs/images/task.png" alt="" width="720" /></p>`
-> `<p align="center"><img src="docs/images/report.png" alt="" width="720" /></p>`
-> `<p align="center"><img src="docs/images/detail.png" alt="" width="720" /></p>`
+> <p align="center"><img src="docs/images/project.png" alt="" width="720" /><p>
+> <p align="center"><img src="docs/images/task.png" alt="" width="720" /></p>
+> <p align="center"><img src="docs/images/report.png" alt="" width="720" /></p>
+> <p align="center"><img src="docs/images/detail.png" alt="" width="720" /></p>
 
 ---
 
